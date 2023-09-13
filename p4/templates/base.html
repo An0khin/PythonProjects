@@ -4,15 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    <title>Title</title>
+    <title>Главная</title>
 </head>
 <body>
     <header>
         <h1>
-            <a href="/">Django blog</a>
+            <a href="/">Блог Джанго</a>
         </h1>
-        <a href="{% url 'post_new' %}">New Blog Post</a>
+        <a href="{% url 'post_new' %}">Новый блог</a>
     </header>
+    {% if user.is_authenticated %}
+    <p>Привет {{user.username}}!</p>
+    <p><a href="{% url 'logout' %}">Выйти</a></p>
+    {% else %}
+    <p>Вы еще не авторизованы.</p>
+    <a href="{% url 'login' %}">Войти</a>
+    {% endif %}
+
     <div class="container">
         {%block content%}
         {%endblock content%}
